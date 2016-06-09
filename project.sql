@@ -2,6 +2,12 @@ DROP DATABASE IF EXISTS university;
 CREATE DATABASE university;
 USE university;
 
+
+CREATE TABLE colleges
+(
+	college_name       VARCHAR(30)    PRIMARY KEY
+);
+
 CREATE TABLE students 
 (
 	student_id         INT            PRIMARY KEY,
@@ -23,15 +29,11 @@ CREATE TABLE group_admin
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE colleges
-(
-	college_name       VARCHAR(30)    PRIMARY KEY
-);
 
 CREATE TABLE notes
 (
-	student_from_id	VARCHAR(30) NOT NULL,
-    student_to_id 	VARCHAR(30),
+	student_from_id INT		 	NOT NULL,
+    student_to_id 	INT			NOT NULL,
     note_id 		INT			PRIMARY KEY 	UNIQUE,
     note_text		MEDIUMTEXT,
     CONSTRAINT student_from_fk
