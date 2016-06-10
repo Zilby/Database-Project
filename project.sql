@@ -19,21 +19,6 @@ CREATE TABLE students
 	ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-CREATE TABLE group_admin
-(
-	student_id        INT             NOT NULL, 
-    group_id 		  INT 			  NOT NULL,
-    PRIMARY KEY (group_id, student_id),
-	CONSTRAINT student_id_fk
-		FOREIGN KEY (student_id)
-		REFERENCES students (student_id)
-	ON DELETE CASCADE ON UPDATE CASCADE
-    CONSTRAINT group_id_fk
-		FOREIGN KEY (group_id)
-		REFERENCES groups (group_id)
-	ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE notes
 (
 	student_from_id	INT 		NOT NULL,
@@ -62,7 +47,7 @@ CREATE table groups
 		ON DELETE CASCADE ON UPDATE SET NULL 
 );
 
-CREATE TABLE groups_to_students
+CREATE TABLE members
 (
 	group_id 		INT				NOT NULL,
     student_id		INT     		NOT NULL,
@@ -77,6 +62,21 @@ CREATE TABLE groups_to_students
         ON DELETE CASCADE ON UPDATE CASCADE 
 );
     
+CREATE TABLE group_admin
+(
+	student_id        INT             NOT NULL, 
+    group_id 		  INT 			  NOT NULL,
+    PRIMARY KEY (group_id, student_id),
+	CONSTRAINT student_id_fk
+		FOREIGN KEY (student_id)
+		REFERENCES students (student_id)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT group_id_fk
+		FOREIGN KEY (group_id)
+		REFERENCES groups (group_id)
+	ON DELETE CASCADE ON UPDATE CASCADE
+);    
+
 CREATE TABLE thread
 (
 	thread_id 		INT 			PRIMARY KEY,
@@ -106,7 +106,7 @@ CREATE TABLE thread_comment
         ON DELETE CASCADE ON UPDATE CASCADE , 
 	CONSTRAINT thread_fk
 		FOREIGN KEY (thread_id)
-        REFERENCES students (student_id)
+        REFERENCES thread (thread_id)
         ON DELETE CASCADE ON UPDATE CASCADE 
 );
     
