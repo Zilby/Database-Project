@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS university;
-CREATE DATABASE university;
-USE university;
+DROP DATABASE IF EXISTS UniversityTracker;
+CREATE DATABASE UniversityTracker;
+USE UniversityTracker;
 
 CREATE TABLE colleges
 (
